@@ -72,7 +72,7 @@ spec:
 {{- end }}
         envFrom:
           - secretRef:
-              name: "{{ template "harbor.database" . }}"
+              name: "{{ template "harbor.database.secretName" . }}"
         env:
           # put the data into a sub directory to avoid the permission issue in k8s with restricted psp enabled
           # more detail refer to https://github.com/goharbor/harbor-helm/issues/756

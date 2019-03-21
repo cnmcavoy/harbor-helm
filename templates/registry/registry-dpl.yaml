@@ -71,7 +71,7 @@ spec:
         args: ["serve", "/etc/registry/config.yml"]
         envFrom:
         - secretRef:
-            name: "{{ template "harbor.registry" . }}"
+            name: "{{ template "harbor.registry.secretName" . }}"
         env:
         {{- if has "registry" .Values.proxy.components }}
         - name: HTTP_PROXY
@@ -151,17 +151,17 @@ spec:
 {{- end }}
         envFrom:
         - secretRef:
-            name: "{{ template "harbor.registry" . }}"
+            name: "{{ template "harbor.registry.secretName" . }}"
         env:
         - name: CORE_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ template "harbor.core" . }}
+              name: {{ template "harbor.core.secretName" . }}
               key: secret
         - name: JOBSERVICE_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ template "harbor.jobservice" . }}
+              name: "{{ template "harbor.jobservice.secretName" . }}"
               key: JOBSERVICE_SECRET
         {{- if .Values.internalTLS.enabled }}
         - name: INTERNAL_TLS_ENABLED
@@ -205,7 +205,7 @@ spec:
       volumes:
       - name: registry-htpasswd
         secret:
-          secretName: {{ template "harbor.registry" . }}
+          secretName: {{ template "harbor.registry.secretName" . }}
           items:
             - key: REGISTRY_HTPASSWD
               path: passwd
@@ -227,7 +227,7 @@ spec:
       {{- if and .Values.persistence.enabled (eq .Values.persistence.imageChartStorage.type "gcs") }}
       - name: gcs-key
         secret:
-          secretName: {{ template "harbor.registry" . }}
+          secretName: {{ template "harbor.registry.secretName" . }}
           items:
             - key: GCS_KEY_DATA
               path: gcs-key.json

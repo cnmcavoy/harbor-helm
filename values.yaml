@@ -425,13 +425,20 @@ core:
   # If a secret key is not specified, Helm will generate one.
   # Must be a string of 16 chars.
   secret: ""
+
+  # Fill the name of a kubernetes secret, if you don't want this chart to
+  # generate one.
+  # If specified, a core secret will not be generated.
+  # If this is set, secret should not be set.
+  secretName: ""
+
   # Fill the name of a kubernetes secret if you want to use your own
   # TLS certificate and private key for token encryption/decryption.
   # The secret must contain keys named:
   # "tls.crt" - the certificate
   # "tls.key" - the private key
   # The default key pair will be used if it isn't set
-  secretName: ""
+  certSecretName: ""
   # The XSRF key. Will be generated automatically if it isn't specified
   xsrfKey: ""
 
@@ -462,6 +469,11 @@ jobservice:
   # If a secret key is not specified, Helm will generate one.
   # Must be a string of 16 chars.
   secret: ""
+  # Fill the name of a kubernetes secret, if you don't want this chart to
+  # generate one.
+  # If specified, a jobservice secret will not be generated.
+  # If this is set, secret should not be set.
+  secretName: ""
 
 registry:
   # set the service account to be used, default if left empty
@@ -495,6 +507,12 @@ registry:
   # If a secret key is not specified, Helm will generate one.
   # Must be a string of 16 chars.
   secret: ""
+  # Fill the name of a kubernetes secret, if you don't want this chart to
+  # generate one.
+  # If specified, a registry secret will not be generated.
+  # If this is set, secret should not be set.
+  secretName: ""
+
   # If true, the registry returns relative URLs in Location headers. The client is responsible for resolving the correct URL.
   relativeurls: false
   credentials:
@@ -535,6 +553,10 @@ chartmuseum:
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
+  # Fill the name of a kubernetes secret, if you don't want this chart to
+  # generate one.
+  # If specified, a chartmuseum secret will not be generated.
+  secretName: ""
 
 trivy:
   # enabled the flag to enable Trivy scanner
@@ -654,6 +676,11 @@ database:
     nodeSelector: {}
     tolerations: []
     affinity: {}
+    # Fill the name of a kubernetes secret, if you don't want this chart to
+    # generate one.
+    # If specified, a database secret will not be generated.
+    # If this is set, secret should not be set.
+    secretName: ""
   external:
     host: "192.168.0.1"
     port: "5432"
@@ -743,4 +770,3 @@ metrics:
   exporter:
     path: /metrics
     port: 8001
-

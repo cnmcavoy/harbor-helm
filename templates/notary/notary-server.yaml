@@ -64,10 +64,10 @@ spec:
           secretName: "{{ template "harbor.notary-server" . }}"
       - name: token-service-certificate
         secret:
-          {{- if .Values.core.secretName }}
-          secretName: {{ .Values.core.secretName }}
+          {{- if .Values.core.certSecretName }}
+          secretName: {{ .Values.core.certSecretName }}
           {{- else }}
-          secretName: {{ template "harbor.core" . }}
+          secretName: {{ template "harbor.core.secretName" . }}
           {{- end }}
       - name: signer-certificate
         secret:
