@@ -72,7 +72,7 @@ spec:
         - configMapRef:
             name: "{{ template "harbor.chartmuseum" . }}"
         - secretRef:
-            name: "{{ template "harbor.chartmuseum" . }}"
+            name: "{{ template "harbor.chartmuseum.secretName" . }}"
         env:
           {{- if has "chartmuseum" .Values.proxy.components }}
           - name: HTTP_PROXY
@@ -95,7 +95,7 @@ spec:
           - name: BASIC_AUTH_PASS
             valueFrom:
               secretKeyRef:
-                name: {{ template "harbor.core" . }}
+                name: {{ template "harbor.core.secretName" . }}
                 key: secret
           - # Needed to make AWS' client connect correctly (see https://github.com/helm/chartmuseum/issues/280)
             name: AWS_SDK_LOAD_CONFIG
@@ -139,7 +139,7 @@ spec:
       {{- if and .Values.persistence.enabled (eq .Values.persistence.imageChartStorage.type "gcs") }}
       - name: gcs-key
         secret:
-          secretName: {{ template "harbor.registry" . }}
+          secretName: {{ template "harbor.registry.secretName" . }}
           items:
             - key: GCS_KEY_DATA
               path: gcs-key.json
