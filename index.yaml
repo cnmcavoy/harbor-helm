@@ -25,7 +25,7 @@ entries:
     - https://github.com/goharbor/harbor
     - https://github.com/goharbor/harbor-helm
     urls:
-    - https://cnmcavoy.github.io/goharbor/harbor-helm/harbor-1.6.0-dev.tgz
+    - https://cnmcavoy.github.io/harbor-helm/harbor-1.6.0-dev.tgz
     version: 1.6.0-dev
   - apiVersion: v1
     appVersion: dev
@@ -51,6 +51,6 @@ entries:
     - https://github.com/goharbor/harbor
     - https://github.com/goharbor/harbor-helm
     urls:
-    - https://cnmcavoy.github.io/goharbor/harbor-helm/harbor-1.4.0-dev.tgz
+    - https://cnmcavoy.github.io/harbor-helm/harbor-1.4.0-dev.tgz
     version: 1.4.0-dev
 generated: "2021-03-05T11:01:48.202330355-05:00"
