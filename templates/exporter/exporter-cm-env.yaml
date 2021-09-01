@@ -19,7 +19,9 @@ data:
   HARBOR_EXPORTER_CACHE_CLEAN_INTERVAL: "{{ .Values.exporter.cacheCleanInterval }}"
   HARBOR_METRIC_NAMESPACE: harbor
   HARBOR_METRIC_SUBSYSTEM: exporter
+  {{- if eq .Values.database.type "internal" }}
   HARBOR_REDIS_URL: "{{ template "harbor.redis.urlForJobservice" . }}"
+  {{- end }}
   HARBOR_REDIS_NAMESPACE: harbor_job_service_namespace
   HARBOR_REDIS_TIMEOUT: "3600"
   HARBOR_SERVICE_SCHEME: "{{ template "harbor.component.scheme" . }}"

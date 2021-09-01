@@ -108,8 +108,13 @@ spec:
         {{- end }}
       volumes:
       - name: jobservice-config
+        {{- if .Values.jobservice.secretConfig }}
+        secret:
+          secretName: {{ .Values.jobservice.secretConfig }}
+        {{- else }}
         configMap:
           name: "{{ template "harbor.jobservice" . }}"
+        {{- end }}
       - name: job-logs
         {{- if and .Values.persistence.enabled (has "file" .Values.jobservice.jobLoggers) }}
         persistentVolumeClaim:

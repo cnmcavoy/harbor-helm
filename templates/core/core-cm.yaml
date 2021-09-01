@@ -37,8 +37,10 @@ data:
   LOG_LEVEL: "{{ .Values.logLevel }}"
   CONFIG_PATH: "/etc/core/app.conf"
   CHART_CACHE_DRIVER: "redis"
+  {{- if eq .Values.redis.type "internal" }}
   _REDIS_URL_CORE: "{{ template "harbor.redis.urlForCore" . }}"
   _REDIS_URL_REG: "{{ template "harbor.redis.urlForRegistry" . }}"
+  {{- end }}
   PORTAL_URL: "{{ template "harbor.portalURL" . }}"
   REGISTRY_CONTROLLER_URL: "{{ template "harbor.registryControllerURL" . }}"
   REGISTRY_CREDENTIAL_USERNAME: "{{ .Values.registry.credentials.username }}"

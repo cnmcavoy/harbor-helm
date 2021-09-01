@@ -493,11 +493,9 @@ jobservice:
   secret: ""
   ## The priority class to run the pod as
   priorityClassName:
-  # Fill the name of a kubernetes secret, if you don't want this chart to
-  # generate one.
-  # If specified, a jobservice secret will not be generated.
-  # If this is set, secret should not be set.
   secretName: ""
+  # If specified, the jobservice configuration will be used from this config key in the secret, rather than generating a configmap
+  secretConfig: ""
 
 registry:
   # set the service account to be used, default if left empty
@@ -540,6 +538,8 @@ registry:
   # If specified, a registry secret will not be generated.
   # If this is set, secret should not be set.
   secretName: ""
+  # If specified, the registry configuration will be used from this config key in the secret, rather than generating a configmap
+  secretConfig: ""
 
   # If true, the registry returns relative URLs in Location headers. The client is responsible for resolving the correct URL.
   relativeurls: false
@@ -649,6 +649,8 @@ trivy:
   podAnnotations: {}
   ## The priority class to run the pod as
   priorityClassName:
+  # If specified, the trivy configuration will be used from the secret, rather than generating a secret
+  secretName: ""
 
 notary:
   enabled: true

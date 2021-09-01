@@ -219,8 +219,13 @@ spec:
             - key: REGISTRY_HTPASSWD
               path: passwd
       - name: registry-config
+        {{- if .Values.registry.secretConfig }}
+        secret:
+          secretName: {{ .Values.registry.secretConfig }}
+        {{- else }}
         configMap:
           name: "{{ template "harbor.registry" . }}"
+        {{- end }}
       - name: registry-data
       {{- if and .Values.persistence.enabled (eq .Values.persistence.imageChartStorage.type "filesystem") }}
         persistentVolumeClaim:

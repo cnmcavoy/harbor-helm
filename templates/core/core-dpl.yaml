@@ -147,7 +147,7 @@ spec:
           {{- if .Values.core.certSecretName }}
           secretName: {{ .Values.core.certSecretName }}
           {{- else }}
-          secretName: {{ template "harbor.core.secretName" . }}
+          secretName: {{ template "harbor.core" . }}
           {{- end }}
       {{- if .Values.expose.tls.enabled }}
       - name: ca-download
